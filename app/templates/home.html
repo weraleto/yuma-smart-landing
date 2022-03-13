@@ -1,5 +1,110 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
-<div class="title1">hello</div>
+<header class="header">
+    <div class="container">
+        <div class="yuma-smart">
+            {% include "svg/yuma-smart.html" %}
+        </div>
+        <div class="header__title title1">
+            <div class="header__title--line">
+                <span>Ваши</span> <span>микромаркеты</span>
+            </div>
+            <div class="grid-layout">
+                <span>с</span> <span class="header__title--personal">персональным</span>
+            </div>
+            <div class="header__title--line">
+                <span>мобильным приложением</span>
+            </div>
+        </div>
+    </div>
+
+</header>
+<main class="main">
+    <div class="container pb">
+        <div class="block-offset grid-layout">
+            <h2 class="title2 block-offset__title">кому подходит
+                <span class="no-word-break">yuma-smart</span></h2>
+            <div class="block-offset__content">
+                {% include 'base_parts/collapse.html' with data=who_needs_items %}
+            </div>
+        </div>
+
+        <div class="block-offset grid-layout">
+            <h2 class="title2 block-offset__title">сервис <span class="no-word-break">yuma-smart.</span>
+                продуманный.
+                бесплатный.</h2>
+            <div class="block-offset__content text-blocks">
+                <div class="text-blocks__col">
+                    <div class="text-blocks__item">
+                        <h3 class="subtitle text-blocks__item-subtitle">Мобильное приложение под вашим брендом</h3>
+                        <p class="text4">С вашей собственной маркетинговой платформой: аналитикой покупательских
+                            предпочтений, функциями таргетированной рекламы, системой лояльности с баллами и другими
+                            гибкими настройками. Всё включено.</p>
+                    </div>
+                    <div class="text-blocks__item">
+                        <h3 class="subtitle text-blocks__item-subtitle">Техподдержка 24/7. Выезд в день обращения</h3>
+                        <p class="text4">Мы решаем любые вопросы по торговому оборудованию и ПО, которые возникают у
+                            владельцев микромаркетов и покупателей. Дистанционно или с оперативным выездом.</p>
+                    </div>
+                </div>
+                <div class="text-blocks__col">
+                    <div class="text-blocks__item">
+                        <h3 class="subtitle text-blocks__item-subtitle">Учет, склад, инвентаризация</h3>
+                        <p class="text4">В полном объеме и с управлением через ваш единый личный кабинет. Полноценный
+                            учет, инвентаризации и все функции управления складом и заказами, актуальные для сферы
+                            общественного питания.</p>
+                    </div>
+                    <div class="text-blocks__item">
+                        <h3 class="subtitle text-blocks__item-subtitle">Полностью готовое решение</h3>
+                        <p class="text4">Эквайринг, фискализация, брендирование торгового оборудования - всё это сделаем
+                            мы. Вы получите полноценный микромаркет, оформленный в вашем стиле и полностью готовый к
+                            работе.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="block-offset grid-layout">
+            <h2 class="title2 block-offset__title">Ответы на
+                вопросы бизнеса</h2>
+            <div class="block-offset__content">
+                {% include 'base_parts/collapse.html' with data=faq extra_class='faq-item' %}
+            </div>
+        </div>
+    </div>
+
+    {% include 'base_parts/contact-form.html' with theme='dark' title='Получите скидку 5%' subtitle='на любое торговое оборудование' small='Акция действует до 01/05/2022'  %}
+
+    <div class="container pb">
+        <div class="block-offset grid-layout">
+            <h2 class="title2 block-offset__title">надежность
+                ТЕХНОЛОГИИ YUMA</h2>
+            <div class="block-offset__content">
+                <div class="flip-card__items card-items">
+                    {% for item in reliability %}
+                    <div class="flip-card card-item" style="top: {% widthratio -39 1 forloop.counter0 %}px">
+                        <div class="flip-card-inner card-item__inner">
+                            <div class="flip-card-front card-item__front">
+                                <small>{{item.small}}</small>
+                                <h4 class="title2">{{item.num}}</h4>
+                            </div>
+                            <div class="flip-card-back card-item__back">
+                                <p>{{item.back}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+    </div>
+</main>
+{% include 'base_parts/contact-form.html' with theme='light' title='начнем? это легко' subtitle='Расскажем. Подключим. Обучим.'  %}
+{% endblock %}
+
+{% block extra_script %}
+<script src="{% static 'js/main.js' %}"></script>
 {% endblock %}

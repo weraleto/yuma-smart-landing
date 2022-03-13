@@ -1,0 +1,39 @@
+{% load static %}
+
+<div class="collapsible__blocks js-collapsible">
+    {% for item in data %}
+    <div class="collapsible__item {{extra_class}}">
+        <div class="collapsible__item--header">
+            <div class="collapsible__item--header__inner">
+                <h4 class="subtitle">
+                    {{item.title}}
+                </h4>
+            </div>
+            <div class="collapsible__item--arrow">
+                <img src="{% static 'img/arrow.svg' %}">
+            </div>
+        </div>
+        <div class="collapsible__item--content">
+            <div class="collapsible__item--content__inner">
+                <div class="collapsible__item--content__text">
+                    <p class="text4">{{item.text}}</p>
+                </div>
+                {% if item.steps %}
+                <div class="collapsible__item--content__steps">
+                    {% for step in item.steps %}
+                        <div class="collapsible__item--content__step">
+                            <div class="collapsible__item--content__step--num">
+                                {{forloop.counter}}
+                            </div>
+                            <p class="collapsible__item--content__step--text">
+                                {{step}}
+                            </p>
+                        </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>

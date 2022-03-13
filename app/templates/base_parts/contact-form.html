@@ -1,0 +1,32 @@
+{% load static %}
+
+<div class="contact-form theme-{{theme}}">
+    <div class="grid-layout container">
+        <div class="contact-form__container">
+            <div class="contact-form__text">
+                <h3 class="title2">{{title}}</h3>
+                <h4 class="subtitle">{{subtitle}}</h4>
+                {% if small %}
+                    <small class="text6">{{small}}</small>
+                {% endif %}
+            </div>
+            <form action="#" class="contact-form__form">
+                <div class="contact-form__form-group">
+                    <label class="contact-form__label text6" for="">Ваше Имя</label>
+                    <input type="text" placeholder="Иван Иванов">
+                </div>
+                <div class="contact-form__form-group">
+                    <label class="contact-form__label text6" for="">Ваш телефон</label>
+                    <input type="text" placeholder="+7 (ХХХ) ХХХ ХХ ХХ">
+                </div>
+                <div class="contact-form__form-group">
+                    <label class="label_checkbox text6" for="policy_{{theme}}">
+                        <input type="checkbox" name="policy" id="policy_{{theme}}">
+                        Я согласен с политикой обработки персональных данных.
+                    </label>
+                </div>
+                <button type="submit" class="btn large {% if theme == 'dark' %} primary {% else %} outlined {% endif %}">отправить</button>
+            </form>
+        </div>
+    </div>
+</div>

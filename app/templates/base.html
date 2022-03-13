@@ -12,10 +12,16 @@
     {% block extra_style %}{% endblock %}
 </head>
 <body>
-    {% include 'base_parts/nav.html' %}
-    {% block content %}{% endblock %}
+    <div class="app">
+        {% include 'base_parts/nav.html' %}
 
+        {% block content %}{% endblock %}
 
-    {% block extra_script %}{% endblock %}
+            <!--content-->
+
+        {% include 'base_parts/footer.html' %}
+
+        {% block extra_script %}{% endblock %}
+    </div>
 </body>
 </html>   
