@@ -61,17 +61,17 @@ DATABASES = {
     }
 }
 
-if not DEBUG:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': env.str('DB_NAME', 'my_db'),
-            'USER': env.str('DB_USER', 'admin'),
-            'PASSWORD': env.str('DB_PASSWORD', 'password'),
-            'HOST': env.str('DB_HOST', 'localhost'),
-            'PORT': env.int('DB_PORT', 5432)
-        }
+# if not DEBUG:
+DATABASES = {
+    'default': {
+        'ENGINE': env('DB_ENGINE', 'django.db.backends.sqlite3'),
+        'NAME': env('DB_NAME', BASE_DIR / 'db.sqlite3'),
+        'USER': env('DB_USER', 'user'),
+        'PASSWORD': env('DB_PASSWORD', 'password'),
+        'HOST': env('DB_HOST', 'localhost'),
+        'PORT': env.int('DB_PORT', ''),
     }
+}
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -102,3 +102,25 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOG_PATH = 'logs/main.log'
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'ERROR',
+            'class': 'logging.FileHandler',
+            'filename': LOG_PATH,
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+
+    },
+}
