@@ -18,6 +18,8 @@
                 <span>мобильным приложением</span>
             </div>
         </div>
+
+        {% include "base_parts/infoblock.html" with text='Продавайте свежую еду и напитки без персонала. Запускайте акции и программы лояльности через приложение.' button_type='primary' button_text='Начать' %}
     </div>
 
 </header>
@@ -67,6 +69,41 @@
         </div>
 
         <div class="block-offset grid-layout">
+            <h2 class="title2 block-offset__title">оптимальные решения 
+                <span class="no-word-break">yuma-smart</span></h2>
+            <!--<div class="block-offset__content">-->
+                <div class="translated-cards">
+                    {% for i in descisions %}
+                    <div class="card translated-card__item">
+                        <div class="translated-card__item--front">
+                            <h5 class="subtitle">{{i.title}}</h5>
+                            <div class="translated-card__item--icon"></div>
+                            <div class="translated-card__item--bottom">
+                                <small>Вам подойдет</small>
+                                <p class="subtitle">{{i.name}}<br>{{i.price}}</p>
+
+                                <small>{{i.subtext}}</small>
+                            </div>
+                        </div>
+                        <div class="translated-card__item--overlay">
+                            <div class="translated-card__item--description">
+                            {% for d in i.description %}
+                                <div class="translated-card__item--description-group">
+                                    <h4 class="subtitle">
+                                        {{d.title}}
+                                    </h4>
+                                    <p>{{d.text}}</p>
+                                </div>
+                            {% endfor %}
+                            </div>
+                            <a href="#" class="btn large primary">Заказать</a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            <!--</div>-->
+        </div>
+        <div class="block-offset grid-layout">
             <h2 class="title2 block-offset__title">Ответы на
                 вопросы бизнеса</h2>
             <div class="block-offset__content">
@@ -84,7 +121,7 @@
             <div class="block-offset__content">
                 <div class="flip-card__items card-items">
                     {% for item in reliability %}
-                    <div class="flip-card card-item" style="top: {% widthratio -39 1 forloop.counter0 %}px">
+                    <div class="card flip-card card-item" style="top: {% widthratio -39 1 forloop.counter0 %}px">
                         <div class="flip-card-inner card-item__inner">
                             <div class="flip-card-front card-item__front">
                                 <small>{{item.small}}</small>
@@ -100,6 +137,22 @@
             </div>
         </div>
 
+
+        <div class="block-offset grid-layout pt0">
+            <h2 class="title2 block-offset__title">партнеры <span class="no-word-break">yuma-smart</span>
+                в россии</h2>
+            <div class="block-offset__content">
+                <div class="partners-gallery__wrapper">
+                    <div class="partners-gallery">
+                        {% for i in '123456'|make_list %}
+                        <div class="partners-gallery__item">
+                            <img src="{% get_static_prefix %}/img/partners/p-{{i}}.svg" alt="">
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </main>
 {% include 'base_parts/contact-form.html' with theme='light' title='начнем? это легко' subtitle='Расскажем. Подключим. Обучим.'  %}

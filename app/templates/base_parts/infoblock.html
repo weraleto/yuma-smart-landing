@@ -1,0 +1,11 @@
+<div class="grid-layout">
+    <div class="infoblock">
+        <div class="infoblock__text">
+            {{text}}
+        </div>
+
+        {% if button_type %}
+            <a href="#" class="infoblock__button btn large {{button_type}}">{{button_text}}</a>
+        {% endif %}
+    </div>
+</div>
