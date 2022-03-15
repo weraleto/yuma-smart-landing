@@ -439,7 +439,7 @@ input[type=checkbox] {
 .collapsible__item--content {
     max-height: 0;
     overflow: hidden;
-    transition: all .7s ease-in-out;
+    transition: all .5s ease;
 }
 
 .collapsible__item--content__text {
@@ -451,7 +451,7 @@ input[type=checkbox] {
 }
 
 .collapsible__item--arrow {
-    transition: transform .3s ease;
+    transition: transform .5s ease;
 }
 
 .collapsible__item.opened .collapsible__item--arrow {
@@ -506,7 +506,8 @@ input[type=checkbox] {
     text-align: center;
     padding: 50px 31px 40px;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
     transition: all .3s ease;
     position: relative;
