@@ -138,20 +138,20 @@
         </div>
 
 
-        <div class="block-offset grid-layout pt0">
-            <h2 class="title2 block-offset__title">партнеры <span class="no-word-break">yuma-smart</span>
-                в россии</h2>
-            <div class="block-offset__content">
-                <div class="partners-gallery__wrapper">
-                    <div class="partners-gallery">
-                        {% for i in '123456'|make_list %}
-                        <div class="partners-gallery__item">
-                            <img src="{% get_static_prefix %}/img/partners/p-{{i}}.svg" alt="">
-                        </div>
-                        {% endfor %}
+    </div>
+    <div class="block-offset grid-layout pt0 pb">
+        <h2 class="title2 block-offset__title">партнеры <span class="no-word-break">yuma-smart</span>
+            в россии</h2>
+        <div class="marquee partners-gallery__wrapper">
+
+                <div class="partners-gallery marquee__inner">
+                    {% for i in '123456'|make_list %}
+                    <div class="partners-gallery__item ">
+                        <img src="{% get_static_prefix %}/img/partners/p-{{i}}.svg" alt="">
                     </div>
+                    {% endfor %}
                 </div>
-            </div>
+
         </div>
     </div>
 </main>

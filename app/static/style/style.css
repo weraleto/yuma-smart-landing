@@ -771,10 +771,25 @@ input[type=checkbox] {
 }
 
 .partners-gallery__wrapper {
-    width: 1340px;
+    grid-column: 1/11;
     overflow: hidden;
+    white-space: nowrap;
 }
 
 .partners-gallery__item {
+    flex: 1 0 200px;
+    max-width: 200px;
     margin-right: 70px;
+}
+
+.marquee {
+    overflow: hidden;
+    font-size: 0;
+    white-space: nowrap;
+    cursor: default;
+    user-select: none;
+}
+
+.marquee__inner {
+    position: relative;
 }
