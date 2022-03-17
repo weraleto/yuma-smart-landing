@@ -148,9 +148,11 @@
 
                 <div class="partners-gallery marquee__inner">
                     {% for i in '123456'|make_list %}
-                    <div class="partners-gallery__item ">
-                        <img src="{% get_static_prefix %}/img/partners/p-{{i}}.svg" alt="">
-                    </div>
+                        {% for i in '123456'|make_list %}
+                        <div class="partners-gallery__item ">
+                            <img src="{% get_static_prefix %}/img/partners/p-{{i}}.svg" alt="">
+                        </div>
+                        {% endfor %}
                     {% endfor %}
                 </div>
 
