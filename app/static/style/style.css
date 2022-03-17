@@ -292,10 +292,107 @@ input[type=checkbox] {
     z-index: 10000;
 }
 
+.navigation-container {
+    align-items: center;
+}
 
-/* .navigation-container {
-    
-} */
+.navigation-inner {
+    grid-column: 4/11;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navigation-link__item {
+    position: relative;
+}
+
+.navigation-link__item::after {
+    content: '';
+    position: absolute;
+    display: block;
+    height: 3px;
+    background-color: var(--main-black);
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transform: translate(0, 8px);
+    opacity: 0;
+    transition: opacity .3s ease;
+}
+
+.navigation-link__item:hover::after,
+.navigation-link__item.active::after {
+    opacity: 1;
+}
+
+.navigation-link__dropdown {
+    cursor: pointer;
+    position: relative;
+    min-width: 160px;
+    min-height: 68px;
+    display: flex;
+    align-items: center;
+    background-color: white;
+    z-index: 10000;
+}
+
+.dropdown__header {
+    display: flex;
+    align-items: center;
+}
+.dropdown__selected-title {
+    display: inline-block;
+    margin-right: 8px;
+}
+
+.dropdown__items {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: var(--main-white);
+    border: 2px solid;
+    border-radius: var(--border-radius-default);
+    padding: 15px 15px 23px;
+    min-width: 180px;
+    z-index: -1;
+    opacity: 0;
+    visibility: hidden;
+    transform: translate(0, -100px);
+    transition: all .3s ease;
+}
+
+.navigation-link__dropdown.opened .dropdown__items {
+    z-index: 9999;
+    opacity: 1;
+    visibility: visible;
+    transform: translate(0, 8px);
+}
+
+.dropdown__item {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown__item:not(:last-child) {
+    margin-bottom: 18px;
+}
+
+.dropdown__item::after {
+    content: '';
+    display: block;
+    height: 3px;
+    left: 0;
+    right: 0;
+    background-color: var(--yellow-primary);
+    bottom: 0;
+    transform: translate(0, 8px);
+    opacity: 0;
+    transition: opacity .3s ease;
+}
+.dropdown__item.active::after, .dropdown__item:hover::after {
+    opacity: 1;
+}
 
 .header {
     padding-top: 170px;

@@ -29,6 +29,31 @@ function startAnimFrameAnimation(rect) {
   window.requestAnimationFrame(step);
 }
 
+function checkCityPhone() {
+  let cityPhone = localStorage.getItem('cityPhone')
+  if (cityPhone) {
+    let {city, phone} = JSON.parse(cityPhone)
+    setCityPhone(city, phone)
+  }
+}
+
+function setCityPhone(city, phone) {
+  localStorage.setItem('cityPhone', JSON.stringify({city, phone}))
+
+  let cityPhoneEl = document.querySelector('.js-city-tel')
+  
+  elements = document.querySelector('.js-city-dropdown-items')
+  cityPhoneEl.innerHTML = phone
+  cityPhoneEl.setAttribute('href', 'tel:'+phone)
+  Array.from(elements.children).forEach(function(it){
+    it.classList.remove('active')
+    if (it.dataset['cityPhone'] == phone) {
+      it.classList.add('active')
+    }
+  })
+  document.querySelector('.dropdown__selected-title').innerHTML = city
+}
+
 function translatedCardAnimationIn(event) {
   let card = event.target
   let cardFront = card.querySelector('.translated-card__item--front')
@@ -71,6 +96,7 @@ function handleCollapsible(event){
 function init(event){
     let collapsible = document.querySelectorAll('.js-collapsible')
     collapsible.forEach(function(it){
+  checkCityPhone()
         it.addEventListener('click', handleCollapsible)
     })
 
@@ -82,6 +108,27 @@ function init(event){
 
     let marquee_el = document.querySelector('.marquee__inner')
     startAnimFrameAnimation(marquee_el);   
+
+    document.querySelectorAll('.js-city-dropdown-el').forEach(function(it){
+      it.addEventListener('click', function(event){
+        let element = event.target.closest('.js-city-dropdown-el')
+        let cityPhone = element.dataset['cityPhone']
+        setCityPhone(element.innerHTML, cityPhone)
+        it.parentElement.parentElement.classList.remove('opened')
+      })
+    })
+
+    document.querySelectorAll('.dropdown__header').forEach(function(it){
+      it.addEventListener('click', function(event){
+        let element = event.target.closest('.dropdown__header')
+        element.parentElement.classList.toggle('opened')
+      })
+      it.parentElement.addEventListener('mouseleave', function(event){
+        setTimeout(function(){
+          it.parentElement.classList.remove('opened')
+        }, 10000)
+      })
+    })
 }
 
 document.addEventListener("DOMContentLoaded", init);
