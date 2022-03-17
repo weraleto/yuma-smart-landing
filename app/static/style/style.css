@@ -185,24 +185,25 @@ input, textarea {
     font-family: 'Raleway', sans-serif;
     padding: 20px;
 }
-
-input.light, textarea.light {
-    border-color: var(--main-gray-light);
-}
-
 input::placeholder {
     color: var(--main-gray-light);
 }
 
-input:focus, textarea:focus, input:hover, textarea:hover {
-    border-color: var(--main-gray);
+input:focus, textarea:focus {
     outline: none;
-
 }
-input:active, textarea:active {
+
+
+input.light, textarea.light {
+    border-color: var(--main-gray-light);
+}
+input.light:focus, textarea.light:focus, input.light:hover, textarea.light:hover {
+    border-color: var(--main-gray);
+}
+input.light:active, textarea.light:active {
     border-color: var(--main-black);
 }
-input:disabled, textarea:disabled {
+input.light:disabled, textarea.light:disabled {
     background-color: #E4E4E4;
 }
 
