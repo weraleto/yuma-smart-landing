@@ -2,7 +2,7 @@
 
 <div class="collapsible__blocks js-collapsible">
     {% for item in data %}
-    <div class="collapsible__item {{extra_class}}">
+    <div class="collapsible__item {{extra_class}} {% if active_default and active_default == forloop.counter %} opened {% endif %}">
         <div class="collapsible__item--header">
             <div class="collapsible__item--header__inner">
                 <h4 class="subtitle">
