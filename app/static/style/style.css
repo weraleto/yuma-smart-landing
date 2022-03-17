@@ -4,14 +4,31 @@
     font-display: swap;
 }
 
-@-webkit-keyframes fadeinout {
+@-webkit-keyframes fadein {
 0% { opacity: 0; }
 100% { opacity: 1; }
 }
 
-@keyframes fadeinout {
+@keyframes fadein {
 0% { opacity: 0; }
 100% { opacity: 1; }
+}
+
+@-webkit-keyframes fadeout {
+0% { opacity: 1; }
+100% { opacity: 0; }
+}
+
+@keyframes fadeout {
+0% { opacity: 1; }
+100% { opacity: 0; }
+}
+
+.animation-fade-in {
+    animation: fadein ease-in-out .5s forwards;
+}
+.animation-fade-out {
+    animation: fadeout ease-in-out .3s forwards;
 }
 
 :root {
@@ -503,7 +520,7 @@ input[type=checkbox] {
 }
 
 .card {
-    border-radius: var(--border-radius-default);
+    border-radius: calc(var(--border-radius-default) * 2);
     border: 2px solid var(--main-gray);
 }
 
@@ -524,7 +541,7 @@ input[type=checkbox] {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    transition: all .3s ease;
+    transition: all .5s ease-in-out ;
     position: relative;
 }
 
@@ -534,12 +551,13 @@ input[type=checkbox] {
 
 .translated-card__item--front {
     max-width: 340px;
+    /* transition: all .3s ease-in-out; */
 }
 
 .translated-card__item--icon {
-    background-color: #efefef;
+    /* background-color: #efefef; */
     width: 230px;
-    height: 230px;
+    /* height: 230px; */
     margin: 30px auto 22px;
 }
 
@@ -551,13 +569,14 @@ input[type=checkbox] {
     left: 0;
     right: 0;
     background-color: var(--main-white);
-    border-radius: var(--border-radius-default);
-    transition: opacity .3s ease;
+    border-radius: calc(var(--border-radius-default) * 2);
     text-align: left;
     padding: 60px 50px;
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    /* transition: all .3s ease-in-out ; */
 }
 
 .translated-card__item--description {
@@ -573,8 +592,6 @@ input[type=checkbox] {
 .translated-card__item--description-group {
     min-width: 380px;
     max-width: 380px;
-    /* opacity: 0; */
-    /* transition: opacity .8s ease .3s; */
 }
 .translated-card__item--description-group:not(:last-child) {
     margin-bottom: 50px;
@@ -582,12 +599,8 @@ input[type=checkbox] {
 
 .translated-card__item:hover {
     flex: 1 1 40%;
-    max-height: unset;
-}
-
-.translated-card__item:hover .translated-card__item--overlay  {
-    -webkit-animation: fadeinout .5s ease forwards;
-    animation: fadeinout .5s ease forwards;
+    border-color: var(--main-black);
+    min-height: 114%;
 }
 
 .card-item {
