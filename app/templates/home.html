@@ -77,7 +77,9 @@
                     <div class="card translated-card__item">
                         <div class="translated-card__item--front">
                             <h5 class="subtitle">{{i.title}}</h5>
-                            <div class="translated-card__item--icon"></div>
+                            <div class="translated-card__item--icon">
+                                <img src="{% get_static_prefix %}/img/{{i.img}}.svg" alt="{{i.title}}">
+                            </div>
                             <div class="translated-card__item--bottom">
                                 <small>Вам подойдет</small>
                                 <p class="subtitle">{{i.name}}<br>{{i.price}}</p>
