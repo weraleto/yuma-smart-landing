@@ -100,6 +100,10 @@ html, body {
     font-variation-settings: 'wght' 500;
 }
 
+.text-bold {
+    font-variation-settings: 'wght' 600;
+}
+
 .no-word-break {
     white-space: nowrap;
 }
@@ -176,10 +180,14 @@ html, body {
 input, textarea {
     width: 100%;
     border-radius: 10px;
-    border: 2px solid var(--main-gray-light);
+    border: 2px solid transparent;
     color: var(--main-black);
     font-family: 'Raleway', sans-serif;
     padding: 20px;
+}
+
+input.light, textarea.light {
+    border-color: var(--main-gray-light);
 }
 
 input::placeholder {
@@ -409,6 +417,9 @@ input[type=checkbox] {
 
 .main {
     flex: 1 0 auto;
+
+    max-width: 100vw;
+    overflow: hidden;
 }
 
 .pb {
@@ -439,7 +450,7 @@ input[type=checkbox] {
 .collapsible__item--content {
     max-height: 0;
     overflow: hidden;
-    transition: all .5s ease;
+    transition: all .5s ease-in-out;
 }
 
 .collapsible__item--content__text {
@@ -451,7 +462,7 @@ input[type=checkbox] {
 }
 
 .collapsible__item--arrow {
-    transition: transform .5s ease;
+    transition: transform .5s ease-in-out;
 }
 
 .collapsible__item.opened .collapsible__item--arrow {
@@ -604,8 +615,10 @@ input[type=checkbox] {
 .card-item__front,
 .card-item__back {
     position: absolute;
-    width: 100%;
-    height: 100%;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
     display: flex;
