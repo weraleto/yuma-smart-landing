@@ -29,6 +29,7 @@ function startAnimFrameAnimation(rect) {
   window.requestAnimationFrame(step);
 }
 
+
 function checkCityPhone() {
   let cityPhone = localStorage.getItem('cityPhone')
   if (cityPhone) {
@@ -108,6 +109,7 @@ function init(event){
 
     let marquee_el = document.querySelector('.marquee__inner')
     startAnimFrameAnimation(marquee_el);   
+
 
     document.querySelectorAll('.js-city-dropdown-el').forEach(function(it){
       it.addEventListener('click', function(event){
