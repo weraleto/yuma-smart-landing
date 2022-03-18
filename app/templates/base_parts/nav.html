@@ -1,5 +1,23 @@
 <nav class="navigation bar">
-    <div class="container navigation-container">
+    <div class="container navigation-container grid-layout">
         {% include "svg/logo.html" with theme='light' %}
+        <div class="navigation-inner">
+            <a href="/" class="navigation-link__item text5">Главная</a>
+            <a href="#" class="navigation-link__item text5">Наши продукты</a>
+            <div class="navigation-link__dropdown text5">
+                <div class="dropdown__header">
+                    <span class="dropdown__selected-title">Санкт-Петербург</span>
+                    <svg width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10.6667 0.5L5.66666 5.5L0.666656 0.5" stroke="#2A2A2A"/>
+                    </svg>                        
+                </div>
+                <div class="dropdown__items js-city-dropdown-items">
+                    <div class="dropdown__item js-city-dropdown-el active" data-city-phone="+7 (812) 309 50 32">Санкт-Петербург</div>
+                    <div class="dropdown__item js-city-dropdown-el" data-city-phone="+7 (495) 999 99 99">Москва</div>
+                </div>
+            </div>
+            <a href="tel:+7 (812) 309 50 32" class="js-city-tel text5 text-bold">+7 (812) 309 50 32</a>
+            <a href="#" class="btn medium outlined">связаться с нами</a>
+        </div>
     </div>
 </nav>
