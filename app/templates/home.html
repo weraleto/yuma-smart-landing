@@ -9,13 +9,14 @@
         </div>
         <div class="header__title title1">
             <div class="header__title--line">
-                <span>Ваши</span> <span>микромаркеты</span>
+                <span>Ваши </span> <span>микромаркеты</span>
             </div>
             <div class="grid-layout">
-                <span>с</span> <span class="header__title--personal">персональным</span>
+                <span>с&nbsp;</span> <span class="header__title--personal">персональным</span>
             </div>
-            <div class="header__title--line">
-                <span>мобильным приложением</span>
+            <div class="header__title--line end-separated">
+                <span>мобильным <span class="only-desktop">приложением</span></span>
+                <span class="hidden-desktop">приложением</span>
             </div>
         </div>
 
@@ -31,6 +32,44 @@
             <div class="block-offset__content">
                 {% include 'base_parts/collapse.html' with data=who_needs_items active_default=2 %}
             </div>
+        </div>
+
+        <div class="block-offset grid-layout">
+            <h2 class="title2 block-offset__title">оптимальные решения 
+                <span class="no-word-break">yuma-smart</span></h2>
+
+                <div class="translated-cards">
+                    {% for i in descisions %}
+                    <div class="card translated-card__item">
+                        <div class="translated-card__item--front">
+                            <h5 class="subtitle">{{i.title}}</h5>
+                            <div class="translated-card__item--icon">
+                                <img src="{% get_static_prefix %}/img/{{i.img}}.svg" alt="{{i.title}}">
+                            </div>
+                            <div class="translated-card__item--bottom">
+                                <small>Вам подойдет</small>
+                                <p class="subtitle">{{i.name}}<br>{{i.price}}</p>
+
+                                <small>{{i.subtext}}</small>
+                            </div>
+                        </div>
+                       <!-- <div class="translated-card__item--overlay">
+                            <div class="translated-card__item--description">
+                            {% for d in i.description %}
+                                <div class="translated-card__item--description-group">
+                                    <h4 class="subtitle">
+                                        {{d.title}}
+                                    </h4>
+                                    <p>{{d.text}}</p>
+                                </div>
+                            {% endfor %}
+                            </div>
+                            <a href="#" class="btn large primary">Заказать</a>
+                        </div>-->
+                    </div>
+                    {% endfor %}
+                </div>
+
         </div>
 
         <div class="block-offset grid-layout">
@@ -68,43 +107,11 @@
             </div>
         </div>
 
-        <div class="block-offset grid-layout">
-            <h2 class="title2 block-offset__title">оптимальные решения 
-                <span class="no-word-break">yuma-smart</span></h2>
-            <!--<div class="block-offset__content">-->
-                <div class="translated-cards">
-                    {% for i in descisions %}
-                    <div class="card translated-card__item">
-                        <div class="translated-card__item--front">
-                            <h5 class="subtitle">{{i.title}}</h5>
-                            <div class="translated-card__item--icon">
-                                <img src="{% get_static_prefix %}/img/{{i.img}}.svg" alt="{{i.title}}">
-                            </div>
-                            <div class="translated-card__item--bottom">
-                                <small>Вам подойдет</small>
-                                <p class="subtitle">{{i.name}}<br>{{i.price}}</p>
+    </div>    
+    {% include 'base_parts/contact-form.html' with theme='dark' title='Получите скидку 5%' subtitle='на любое торговое оборудование' small='Акция действует до 01/05/2022'  %}
+        
 
-                                <small>{{i.subtext}}</small>
-                            </div>
-                        </div>
-                        <div class="translated-card__item--overlay">
-                            <div class="translated-card__item--description">
-                            {% for d in i.description %}
-                                <div class="translated-card__item--description-group">
-                                    <h4 class="subtitle">
-                                        {{d.title}}
-                                    </h4>
-                                    <p>{{d.text}}</p>
-                                </div>
-                            {% endfor %}
-                            </div>
-                            <a href="#" class="btn large primary">Заказать</a>
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
-            <!--</div>-->
-        </div>
+    <div class="container pb-small">
         <div class="block-offset grid-layout">
             <h2 class="title2 block-offset__title">Ответы на
                 вопросы бизнеса</h2>
@@ -112,11 +119,6 @@
                 {% include 'base_parts/collapse.html' with data=faq extra_class='faq-item' %}
             </div>
         </div>
-    </div>
-
-    {% include 'base_parts/contact-form.html' with theme='dark' title='Получите скидку 5%' subtitle='на любое торговое оборудование' small='Акция действует до 01/05/2022'  %}
-
-    <div class="container pb-small">
         <div class="block-offset grid-layout">
             <h2 class="title2 block-offset__title">надежность
                 ТЕХНОЛОГИИ YUMA</h2>
