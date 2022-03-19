@@ -29,6 +29,11 @@ function startAnimFrameAnimation(rect) {
   window.requestAnimationFrame(step);
 }
 
+function dispatchClick(){
+  const clickEvent = new Event('click')
+  this.dispatchEvent(clickEvent)
+}
+
 
 function checkCityPhone() {
   let cityPhone = localStorage.getItem('cityPhone')
@@ -36,6 +41,22 @@ function checkCityPhone() {
     let {city, phone} = JSON.parse(cityPhone)
     setCityPhone(city, phone)
   }
+}
+
+function handleDropdown(event) {
+  let overlay = document.getElementById('overlay')
+  let el = this
+  if (!overlay) {
+    overlay = document.createElement('div')
+    overlay.classList.add('body-overlay')
+    overlay.id = 'overlay'
+    document.body.appendChild(overlay)
+    overlay.addEventListener('click', dispatchClick.bind(this))
+  } else {
+    overlay.remove()
+  }
+  document.body.classList.toggle('body-scroll-lock')
+  this.classList.toggle('opened')
 }
 
 function setCityPhone(city, phone) {
@@ -113,24 +134,16 @@ function init(event){
 
     document.querySelectorAll('.js-city-dropdown-el').forEach(function(it){
       it.addEventListener('click', function(event){
-        let element = event.target.closest('.js-city-dropdown-el')
-        let cityPhone = element.dataset['cityPhone']
-        setCityPhone(element.innerHTML, cityPhone)
-        it.parentElement.parentElement.classList.remove('opened')
+        setCityPhone(this.innerHTML, this.dataset['cityPhone'])
       })
     })
 
-    document.querySelectorAll('.dropdown__header').forEach(function(it){
-      it.addEventListener('click', function(event){
-        let element = event.target.closest('.dropdown__header')
-        element.parentElement.classList.toggle('opened')
-      })
-      it.parentElement.addEventListener('mouseleave', function(event){
-        setTimeout(function(){
-          it.parentElement.classList.remove('opened')
-        }, 10000)
-      })
     })
+  })
+
+  document.querySelectorAll('.js-dropdown').forEach(function (it) {
+    it.addEventListener('click', handleDropdown)
+  })
 }
 
 document.addEventListener("DOMContentLoaded", init);

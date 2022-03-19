@@ -82,6 +82,21 @@ html, body {
     width: 100%;
 }
 
+.body-scroll-lock {
+    overflow: hidden;
+}
+
+.body-overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9996;
+    background-color: var(--main-black);
+    opacity: 0.9;
+}
+
 .title1 {
     font-weight: 600;
     /* font-size: 6.04vw; */
@@ -305,9 +320,17 @@ input[type=checkbox] {
 
 .navigation-link__item {
     position: relative;
+    display: flex;
+    align-items: center;
+    min-height: 70px;
 }
 
-.navigation-link__item::after {
+.navigation-link__item span {
+    position: relative;
+    display: inline-block;
+}
+
+.navigation-link__item span::after {
     content: '';
     position: absolute;
     display: block;
@@ -321,25 +344,30 @@ input[type=checkbox] {
     transition: opacity .3s ease;
 }
 
-.navigation-link__item:hover::after,
-.navigation-link__item.active::after {
+.navigation-link__item:hover span::after,
+.navigation-link__item.active span::after {
     opacity: 1;
 }
 
 .navigation-link__dropdown {
     cursor: pointer;
     position: relative;
-    min-width: 160px;
-    min-height: 68px;
+    min-width: 220px;
+    
     display: flex;
     align-items: center;
+    justify-content: space-between;
     background-color: white;
-    z-index: 10000;
 }
 
 .dropdown__header {
     display: flex;
     align-items: center;
+    position: relative;
+    z-index: 10000;
+    padding: 0 35px;
+    min-height: 68px;
+    background-color: white;
 }
 .dropdown__selected-title {
     display: inline-block;
@@ -351,22 +379,22 @@ input[type=checkbox] {
     top: 100%;
     left: 0;
     background-color: var(--main-white);
-    border: 2px solid;
-    border-radius: var(--border-radius-default);
-    padding: 15px 15px 23px;
+    border-radius: 0 0 20px 20px;
+    padding: 8px 35px 25px;
     min-width: 180px;
     z-index: -1;
-    opacity: 0;
     visibility: hidden;
     transform: translate(0, -100px);
     transition: all .3s ease;
 }
 
+.navigation-link__dropdown.opened .dropdown__header {
+    color: var(--main-gray);
+}
 .navigation-link__dropdown.opened .dropdown__items {
     z-index: 9999;
-    opacity: 1;
     visibility: visible;
-    transform: translate(0, 8px);
+    transform: none;
 }
 
 .dropdown__item {
