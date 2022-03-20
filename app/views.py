@@ -43,3 +43,6 @@ class HomePageView(TemplateView):
             ]}
         ]
         return context
+
+class ProductsPageView(TemplateView):
+    template_name = "produkty.html"

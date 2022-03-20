@@ -63,17 +63,13 @@ function handleDropdown(event) {
 }
 
 function setCityPhone(city, phone) {
-  localStorage.setItem('cityPhone', JSON.stringify({
-    city,
-    phone
-  }))
+  localStorage.setItem('cityPhone', JSON.stringify({city, phone}))
 
   let cityPhoneEl = document.querySelector('.js-city-tel')
-
   elements = document.querySelector('.js-city-dropdown-items')
   cityPhoneEl.innerHTML = phone
-  cityPhoneEl.setAttribute('href', 'tel:' + phone)
-  Array.from(elements.children).forEach(function (it) {
+  cityPhoneEl.setAttribute('href', 'tel:'+phone)
+  Array.from(elements.children).forEach(function(it){
     it.classList.remove('active')
     if (it.dataset['cityPhone'] == phone) {
       it.classList.add('active')
@@ -88,12 +84,11 @@ function translatedCardAnimationIn(event) {
   let cardOverlay = card.querySelector('.translated-card__item--overlay')
   cardFront.classList.remove('animation-fade-in')
   cardFront.classList.add('animation-fade-out')
-  setTimeout(function () {
+  setTimeout(function(){
     cardOverlay.classList.remove('animation-fade-out')
     cardOverlay.classList.add('animation-fade-in')
   }, 500)
 }
-
 function translatedCardAnimationOut(event) {
   let card = event.target
   let cardFront = card.querySelector('.translated-card__item--front')
@@ -128,10 +123,10 @@ function init(event) {
     it.addEventListener('click', handleCollapsible)
   })
 
-  document.querySelectorAll('.translated-card__item').forEach(function (it) {
-    it.addEventListener('mouseenter', translatedCardAnimationIn)
-    it.addEventListener('mouseleave', translatedCardAnimationOut)
-  })
+  // document.querySelectorAll('.translated-card__item').forEach(function (it) {
+  //   it.addEventListener('mouseenter', translatedCardAnimationIn)
+  //   it.addEventListener('mouseleave', translatedCardAnimationOut)
+  // })
 
   let marquee_el = document.querySelector('.marquee__inner')
   startAnimFrameAnimation(marquee_el);
