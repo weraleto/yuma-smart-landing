@@ -2,9 +2,9 @@
     <div class="container navigation-container grid-layout">
         {% include "svg/logo.html" with theme='light' %}
         <div class="navigation-inner">
-            <a href="/" class="navigation-link__item text5">Главная</a>
-            <a href="#" class="navigation-link__item text5">Наши продукты</a>
-            <div class="navigation-link__dropdown text5">
+            <a href="/" class="navigation-link__item text5"><span>Главная</span></a>
+            <a href="{% url 'product_page' %}" class="navigation-link__item text5"><span>Наши продукты</span></a>
+            <div class="navigation-link__dropdown js-dropdown text5">
                 <div class="dropdown__header">
                     <span class="dropdown__selected-title">Санкт-Петербург</span>
                     <svg width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -61,6 +61,13 @@ a {
     text-decoration: none;
 }
 
+.only-tablet {
+    display: none;
+}
+.only-mobile {
+    display: none;
+}
+
 html, body {
     font-family: 'Raleway', sans-serif;
     font-size: 16px;
@@ -68,9 +75,7 @@ html, body {
     line-height: 1.2;
 
     font-variant-numeric: lining-nums;
-    -moz-font-feature-settings: "lnum";
-    -webkit-font-feature-settings: "lnum";
-    font-feature-settings: "lnum";
+    font-feature-settings: 'pnum' on, 'lnum' on;
     
     color: var(--main-black);
     height: 100%;
@@ -82,10 +87,25 @@ html, body {
     width: 100%;
 }
 
+.body-scroll-lock {
+    overflow: hidden;
+}
+
+.body-overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9996;
+    background-color: var(--main-black);
+    opacity: 0.9;
+}
+
 .title1 {
     font-weight: 600;
-    /* font-size: 6.04vw; */
-    font-size: 87px;
+    font-size: 6.04vw;
+    /* font-size: 87px; */
     text-transform: uppercase;
     font-variation-settings: 'wght' 600;
 }
@@ -242,6 +262,17 @@ input[type=checkbox] {
     grid-template-columns: repeat(10, 1fr);
 }
 
+.title-ladder {
+    margin-bottom: 50px;
+}
+
+.title-ladder span:first-of-type {
+    grid-column: 2/11;
+}
+.title-ladder span:last-of-type {
+    grid-column: 3/11;
+}
+
 .block-offset {
     padding-top: 150px;
     grid-row-gap: 70px;
@@ -257,14 +288,20 @@ input[type=checkbox] {
     grid-row: 2/3;
 }
 
+.block-offset__content.offset-sm {
+    grid-column: 2/11;
+}
+
 .app {
     display: flex;
     flex-direction: column;
-    height: 100%;
+    /* height: 100%;
+    max-width: 100vw;
+    overflow-x: hidden; */
 }
 
 .bar {
-    height: 70px;
+    min-height: 70px;
     display: flex;
     align-items: center;
 }
@@ -305,9 +342,17 @@ input[type=checkbox] {
 
 .navigation-link__item {
     position: relative;
+    display: flex;
+    align-items: center;
+    min-height: 70px;
 }
 
-.navigation-link__item::after {
+.navigation-link__item span {
+    position: relative;
+    display: inline-block;
+}
+
+.navigation-link__item span::after {
     content: '';
     position: absolute;
     display: block;
@@ -321,25 +366,30 @@ input[type=checkbox] {
     transition: opacity .3s ease;
 }
 
-.navigation-link__item:hover::after,
-.navigation-link__item.active::after {
+.navigation-link__item:hover span::after,
+.navigation-link__item.active span::after {
     opacity: 1;
 }
 
 .navigation-link__dropdown {
     cursor: pointer;
     position: relative;
-    min-width: 160px;
-    min-height: 68px;
+    min-width: 220px;
+    
     display: flex;
     align-items: center;
+    justify-content: space-between;
     background-color: white;
-    z-index: 10000;
 }
 
 .dropdown__header {
     display: flex;
     align-items: center;
+    position: relative;
+    z-index: 10000;
+    padding: 0 35px;
+    min-height: 68px;
+    background-color: white;
 }
 .dropdown__selected-title {
     display: inline-block;
@@ -351,22 +401,22 @@ input[type=checkbox] {
     top: 100%;
     left: 0;
     background-color: var(--main-white);
-    border: 2px solid;
-    border-radius: var(--border-radius-default);
-    padding: 15px 15px 23px;
+    border-radius: 0 0 20px 20px;
+    padding: 8px 35px 25px;
     min-width: 180px;
     z-index: -1;
-    opacity: 0;
     visibility: hidden;
     transform: translate(0, -100px);
     transition: all .3s ease;
 }
 
+.navigation-link__dropdown.opened .dropdown__header {
+    color: var(--main-gray);
+}
 .navigation-link__dropdown.opened .dropdown__items {
     z-index: 9999;
-    opacity: 1;
     visibility: visible;
-    transform: translate(0, 8px);
+    transform: none;
 }
 
 .dropdown__item {
@@ -405,6 +455,7 @@ input[type=checkbox] {
 .header__title--line {
     display: flex;
     justify-content: space-between;
+    text-align-last: right;
 }
 
 .header__title--personal {
@@ -522,12 +573,22 @@ input[type=checkbox] {
     max-width: 75%;
 }
 
-.text-blocks__item:not(:last-child) {
+.text-blocks__item:not(:last-child),
+.text-blocks__item--long:not(:last-child) {
     margin-bottom: 70px;
 }
 
 .text-blocks__item-subtitle {
     margin-bottom: 20px;
+}
+
+.text-blocks__icon .icon-xs {
+    max-width: 85%;
+}
+.text-blocks__icon .icon-xl {
+    min-width: 112%;
+    position: relative;
+    left: -12%;
 }
 
 .main {
@@ -545,7 +606,7 @@ input[type=checkbox] {
 }
 
 .pt0 {
-    padding-top: 0;
+    padding-top: 0 !important;
 }
 
 /* collapsible */
@@ -587,7 +648,7 @@ input[type=checkbox] {
     transform: rotate(45deg) translate(-30%, 30%);
 }
 .collapsible__item.opened .collapsible__item--content {
-    max-height: 300px;
+    max-height: 1000px;
 }
 
 .collapsible__item--content__steps {
@@ -605,6 +666,7 @@ input[type=checkbox] {
 
 .collapsible__item--content__step--num {
     font-size: 4.375rem;
+    line-height: 1;
     font-variation-settings: 'wght' 900;
     margin-right: 20px;
 }
@@ -626,12 +688,14 @@ input[type=checkbox] {
     justify-content: space-between;
     align-items: center;
     grid-column: 1/11;
+    min-height: 570px;
 }
 
 .translated-card__item {
     width: 100%;
     min-height: 100%;
-    flex: 1 1 33.333%;
+    /* flex: 1 1 30%; */
+    flex: 0 1 30%;
     text-align: center;
     padding: 50px 31px 40px;
     display: flex;
@@ -644,6 +708,7 @@ input[type=checkbox] {
 
 .translated-card__item:nth-child(2) {
     margin: 0 28px;
+    /* max-width: calc(); */
 }
 
 .translated-card__item--front {
@@ -695,7 +760,7 @@ input[type=checkbox] {
 }
 
 .translated-card__item:hover {
-    flex: 1 1 40%;
+    flex: 1 0 36%;
     border-color: var(--main-black);
     min-height: 114%;
 }
@@ -739,6 +804,7 @@ input[type=checkbox] {
     align-items: center;
     justify-content: center;
     border-radius: var(--border-radius-default);
+    padding: 10px;
 }
 
 .card-item__front {
@@ -753,9 +819,10 @@ input[type=checkbox] {
 .card-item small {
     position: absolute;
     top: 20px;
-    left: 0;
-    right: 0;
+    left: 10px;
+    right: 10px;
     text-align: center;
+    font-size: inherit;
 }
 
 .card-item:hover {
@@ -763,8 +830,8 @@ input[type=checkbox] {
 }
 
 .card-item:hover .card-item__back {
-    -webkit-animation: fadeinout .3s ease forwards;
-    animation: fadeinout .3s ease forwards;
+    -webkit-animation: fadein .3s ease forwards;
+    animation: fadein .3s ease forwards;
 }
 
 

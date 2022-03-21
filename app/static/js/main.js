@@ -3,10 +3,10 @@ function startAnimFrameAnimation(rect) {
   let positionX = 0;
   let isPaused = false;
 
-  rect.addEventListener('mouseenter', function(){
+  rect.addEventListener('mouseenter', function () {
     isPaused = true
   })
-  rect.addEventListener('mouseleave', function(){
+  rect.addEventListener('mouseleave', function () {
     isPaused = false
     window.requestAnimationFrame(step);
   })
@@ -21,7 +21,7 @@ function startAnimFrameAnimation(rect) {
 
     positionX = positionX + speedX;
     rect.style.left = positionX + 'px';
-    if (!isPaused){
+    if (!isPaused) {
       window.requestAnimationFrame(step);
     }
   }
@@ -29,20 +29,43 @@ function startAnimFrameAnimation(rect) {
   window.requestAnimationFrame(step);
 }
 
+function dispatchClick() {
+  const clickEvent = new Event('click')
+  this.dispatchEvent(clickEvent)
+}
+
 
 function checkCityPhone() {
   let cityPhone = localStorage.getItem('cityPhone')
   if (cityPhone) {
-    let {city, phone} = JSON.parse(cityPhone)
+    let {
+      city,
+      phone
+    } = JSON.parse(cityPhone)
     setCityPhone(city, phone)
   }
+}
+
+function handleDropdown(event) {
+  let overlay = document.getElementById('overlay')
+  let el = this
+  if (!overlay) {
+    overlay = document.createElement('div')
+    overlay.classList.add('body-overlay')
+    overlay.id = 'overlay'
+    document.body.appendChild(overlay)
+    overlay.addEventListener('click', dispatchClick.bind(this))
+  } else {
+    overlay.remove()
+  }
+  document.body.classList.toggle('body-scroll-lock')
+  this.classList.toggle('opened')
 }
 
 function setCityPhone(city, phone) {
   localStorage.setItem('cityPhone', JSON.stringify({city, phone}))
 
   let cityPhoneEl = document.querySelector('.js-city-tel')
-  
   elements = document.querySelector('.js-city-dropdown-items')
   cityPhoneEl.innerHTML = phone
   cityPhoneEl.setAttribute('href', 'tel:'+phone)
@@ -72,65 +95,52 @@ function translatedCardAnimationOut(event) {
   let cardOverlay = card.querySelector('.translated-card__item--overlay')
   cardOverlay.classList.remove('animation-fade-in')
   cardOverlay.classList.add('animation-fade-out')
-  setTimeout(function(){
+  setTimeout(function () {
     cardFront.classList.remove('animation-fade-out')
     cardFront.classList.add('animation-fade-in')
   }, 500)
-  
+
 }
 
 
-function handleCollapsible(event){
-    let all_els = Array.from(this.children)
-    let target = event.target.closest('.collapsible__item')
-    all_els.forEach(function(it){
-        if (it == target) {
-            return
-        } 
-        it.classList.remove('opened')
-    })
-    target.classList.toggle('opened')  
-    
+function handleCollapsible(e) {
+  let all_els = Array.from(this.children)
+  let target = e.target.closest('.collapsible__item')
+  all_els.forEach(function (it) {
+    if (it == target) {
+      return
+    }
+    it.classList.remove('opened')
+  })
+  target.classList.toggle('opened')
 }
 
 
-function init(event){
-    let collapsible = document.querySelectorAll('.js-collapsible')
-    collapsible.forEach(function(it){
+function init(event) {
   checkCityPhone()
-        it.addEventListener('click', handleCollapsible)
+
+  document.querySelectorAll('.js-collapsible').forEach(function (it) {
+    it.addEventListener('click', handleCollapsible)
+  })
+
+  // document.querySelectorAll('.translated-card__item').forEach(function (it) {
+  //   it.addEventListener('mouseenter', translatedCardAnimationIn)
+  //   it.addEventListener('mouseleave', translatedCardAnimationOut)
+  // })
+
+  let marquee_el = document.querySelector('.marquee__inner')
+  startAnimFrameAnimation(marquee_el);
+
+
+  document.querySelectorAll('.js-city-dropdown-el').forEach(function (it) {
+    it.addEventListener('click', function (event) {
+      setCityPhone(this.innerHTML, this.dataset['cityPhone'])
     })
+  })
 
-    let translatedCard = document.querySelectorAll('.translated-card__item')
-    translatedCard.forEach(function(it){
-        it.addEventListener('mouseenter', translatedCardAnimationIn)
-        it.addEventListener('mouseleave', translatedCardAnimationOut)
-    })
-
-    let marquee_el = document.querySelector('.marquee__inner')
-    startAnimFrameAnimation(marquee_el);   
-
-
-    document.querySelectorAll('.js-city-dropdown-el').forEach(function(it){
-      it.addEventListener('click', function(event){
-        let element = event.target.closest('.js-city-dropdown-el')
-        let cityPhone = element.dataset['cityPhone']
-        setCityPhone(element.innerHTML, cityPhone)
-        it.parentElement.parentElement.classList.remove('opened')
-      })
-    })
-
-    document.querySelectorAll('.dropdown__header').forEach(function(it){
-      it.addEventListener('click', function(event){
-        let element = event.target.closest('.dropdown__header')
-        element.parentElement.classList.toggle('opened')
-      })
-      it.parentElement.addEventListener('mouseleave', function(event){
-        setTimeout(function(){
-          it.parentElement.classList.remove('opened')
-        }, 10000)
-      })
-    })
+  document.querySelectorAll('.js-dropdown').forEach(function (it) {
+    it.addEventListener('click', handleDropdown)
+  })
 }
 
 document.addEventListener("DOMContentLoaded", init);
